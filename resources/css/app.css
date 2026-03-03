@@ -96,3 +96,145 @@
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
 }
+
+/* Print Styles for Ticket */
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 2mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 10px !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide unnecessary elements */
+  .print-hidden,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset backgrounds and colors */
+  .bg-background,
+  .bg-secondary,
+  .bg-primary {
+    background: white !important;
+  }
+
+  .text-foreground,
+  .text-muted-foreground {
+    color: black !important;
+  }
+
+  /* Minimize spacing */
+  .min-h-screen {
+    min-height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .p-4,
+  .p-6,
+  .p-8,
+  .md\:p-8 {
+    padding: 4px 8px !important;
+  }
+
+  .space-y-6 > * + *,
+  .space-y-4 > * + * {
+    margin-top: 4px !important;
+  }
+
+  .mb-4,
+  .mb-6 {
+    margin-bottom: 4px !important;
+  }
+
+  .mt-6 {
+    margin-top: 4px !important;
+  }
+
+  .gap-3 {
+    gap: 4px !important;
+  }
+
+  .p-3 {
+    padding: 2px 4px !important;
+  }
+
+  /* Reduce font sizes */
+  .text-6xl {
+    font-size: 2rem !important;
+  }
+
+  .text-2xl {
+    font-size: 1rem !important;
+  }
+
+  .text-xl {
+    font-size: 0.875rem !important;
+  }
+
+  .text-sm {
+    font-size: 8px !important;
+  }
+
+  .text-xs {
+    font-size: 7px !important;
+  }
+
+  /* Ticket header styling */
+  .bg-primary {
+    background: black !important;
+    color: white !important;
+    padding: 8px !important;
+  }
+
+  .text-primary-foreground {
+    color: white !important;
+  }
+
+  .py-8 {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  /* Card styling */
+  .rounded-lg,
+  .overflow-hidden {
+    border-radius: 0 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  /* Badge styling */
+  .bg-yellow-500\/20,
+  .bg-blue-500\/20,
+  .bg-green-500\/20,
+  .bg-orange-500\/20 {
+    background: #f0f0f0 !important;
+    border: 1px solid #ccc !important;
+    color: black !important;
+  }
+
+  /* Info items */
+  .bg-secondary {
+    background: #f9f9f9 !important;
+    border-bottom: 1px dashed #ddd !important;
+  }
+
+  /* Icons - make smaller */
+  svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  /* Max width for print */
+  .max-w-md {
+    max-width: 100% !important;
+  }
+}

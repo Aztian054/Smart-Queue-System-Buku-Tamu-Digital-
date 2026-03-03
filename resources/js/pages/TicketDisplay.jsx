@@ -82,7 +82,7 @@ const TicketDisplay = () => {
     <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-md mx-auto">
         {/* Admin Login Button - Top Right */}
-        <div className="flex justify-end mb-4">
+        <div className="flex justify-end mb-4 print-hidden">
           <button
             onClick={() => navigate('/admin/login')}
             className="flex items-center gap-2 px-4 py-2 bg-secondary hover:bg-secondary/80 text-muted-foreground rounded-lg transition-colors text-sm"
@@ -218,7 +218,7 @@ const TicketDisplay = () => {
             )}
 
             {/* Actions */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 print-hidden">
               <Button 
                 variant="outline" 
                 className="flex-1"
@@ -239,7 +239,7 @@ const TicketDisplay = () => {
         </Card>
 
         {/* Instructions */}
-        <div className="mt-6 p-4 bg-secondary rounded-lg">
+        <div className="mt-6 p-4 bg-secondary rounded-lg print-hidden">
           <h3 className="font-semibold mb-2">Petunjuk:</h3>
           <ul className="text-sm text-muted-foreground space-y-1">
             <li>• Simpan kode tiket Anda untuk referensi</li>
