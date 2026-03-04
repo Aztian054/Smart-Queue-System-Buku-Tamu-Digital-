@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { adminApi } from '@/services/api';
 import { Card, CardContent, Button, Badge } from '@/components/ui';
@@ -6,7 +6,7 @@ import {
   Users, UserCheck, Clock, CheckCircle, 
   LayoutDashboard, FileText, Settings, LogOut,
   RefreshCw, Loader2, Calendar, TrendingUp, ArrowRight,
-  ChevronRight
+  ChevronRight, Video, Upload, Trash2, Play
 } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -15,6 +15,12 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [serviceStats, setServiceStats] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Video state
+  const [video, setVideo] = useState(null);
+  const [videoLoading, setVideoLoading] = useState(false);
+  const [videoUploading, setVideoUploading] = useState(false);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const userData = localStorage.getItem('admin_user');
@@ -22,7 +28,57 @@ const AdminDashboard = () => {
       setUser(JSON.parse(userData));
     }
     fetchStats();
+    fetchVideo();
   }, []);
+
+  const fetchVideo = async () => {
+    setVideoLoading(true);
+    try {
+      const response = await adminApi.getVideo();
+      setVideo(response.data.data);
+    } catch (error) {
+      console.error('Failed to fetch video:', error);
+    } finally {
+      setVideoLoading(false);
+    }
+  };
+
+  const handleVideoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setVideoUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('video', file);
+      
+      const response = await adminApi.uploadVideo(formData);
+      setVideo(response.data.data);
+    } catch (error) {
+      console.error('Failed to upload video:', error);
+      alert('Gagal mengupload video. Pastikan ukuran file tidak melebihi 500MB.');
+    } finally {
+      setVideoUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  const handleVideoDelete = async () => {
+    if (!confirm('Apakah Anda yakin ingin menghapus video ini?')) return;
+    
+    setVideoLoading(true);
+    try {
+      await adminApi.deleteVideo();
+      setVideo(null);
+    } catch (error) {
+      console.error('Failed to delete video:', error);
+      alert('Gagal menghapus video.');
+    } finally {
+      setVideoLoading(false);
+    }
+  };
 
   const fetchStats = async () => {
     try {
@@ -268,12 +324,123 @@ const AdminDashboard = () => {
           </CardContent>
         </Card>
 
+        {/* Video Display Section */}
+        <Card variant="elevated" className="mb-8 animate-fade-in" style={{ animationDelay: '500ms' }}>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-purple-500/10">
+                  <Video className="w-5 h-5 text-purple-500" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold">Video Display</h2>
+                  <p className="text-sm text-muted-foreground">Video yang ditampilkan di display publik</p>
+                </div>
+              </div>
+            </div>
+
+            {videoLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+              </div>
+            ) : video?.exists ? (
+              <div className="space-y-4">
+                {/* Video Preview */}
+                <div className="relative rounded-xl overflow-hidden bg-black aspect-video max-w-lg mx-auto">
+                  <video 
+                    src={video.url} 
+                    controls 
+                    className="w-full h-full object-contain"
+                  >
+                    Browser tidak mendukung video.
+                  </video>
+                </div>
+                
+                {/* Video Info */}
+                <div className="flex items-center justify-between p-4 bg-secondary/50 rounded-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-purple-500/10">
+                      <Play className="w-4 h-4 text-purple-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm truncate max-w-[200px]">{video.name}</p>
+                      <p className="text-xs text-muted-foreground">Video aktif</p>
+                    </div>
+                  </div>
+                  <Button 
+                    variant="destructive" 
+                    size="sm"
+                    onClick={handleVideoDelete}
+                    disabled={videoLoading}
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Hapus
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12 border-2 border-dashed border-border rounded-xl">
+                <Video className="w-16 h-16 mx-auto mb-4 text-muted-foreground/30" />
+                <p className="text-muted-foreground mb-4">Belum ada video yang diupload</p>
+                <label className="cursor-pointer">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleVideoUpload}
+                    accept="video/*"
+                    className="hidden"
+                  />
+                  <Button variant="outline" asChild disabled={videoUploading}>
+                    <span>
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Video
+                    </span>
+                  </Button>
+                </label>
+              </div>
+            )}
+
+            {/* Upload Button (when video exists) */}
+            {video?.exists && (
+              <div className="mt-4 pt-4 border-t border-border">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground">
+                    Format: MP4, WebM, MOV, AVI, dll (Max 500MB)
+                  </p>
+                  <label className="cursor-pointer">
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleVideoUpload}
+                      accept="video/*"
+                      className="hidden"
+                    />
+                    <Button variant="outline" disabled={videoUploading}>
+                      {videoUploading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Uploading...
+                        </>
+                      ) : (
+                        <>
+                          <Upload className="w-4 h-4 mr-2" />
+                          Ganti Video
+                        </>
+                      )}
+                    </Button>
+                  </label>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card 
             variant="elevated" 
             className="cursor-pointer group hover:shadow-material-3 transition-all duration-300 animate-fade-in"
-            style={{ animationDelay: '500ms' }}
+            style={{ animationDelay: '600ms' }}
             onClick={() => navigate('/admin/queue')}
           >
             <CardContent className="p-6">
@@ -293,7 +460,7 @@ const AdminDashboard = () => {
           <Card 
             variant="elevated" 
             className="cursor-pointer group hover:shadow-material-3 transition-all duration-300 animate-fade-in"
-            style={{ animationDelay: '600ms' }}
+            style={{ animationDelay: '700ms' }}
             onClick={() => navigate('/display')}
           >
             <CardContent className="p-6">

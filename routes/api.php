@@ -8,6 +8,7 @@ use App\Http\Controllers\Public\DisplayController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\QueueController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,9 @@ Route::get('/ticket/code/{code}', [TicketController::class, 'getByCode']);
 
 // Display (for polling)
 Route::get('/display/current', [DisplayController::class, 'current']);
+
+// Video (public - for display)
+Route::get('/video', [VideoController::class, 'show']);
 
 // ==================== ADMIN AUTH ROUTES ====================
 
@@ -66,5 +70,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/counters', [ServiceController::class, 'storeCounter']);
         Route::put('/counters/{id}', [ServiceController::class, 'updateCounter']);
         Route::delete('/counters/{id}', [ServiceController::class, 'destroyCounter']);
+    });
+
+    // Video Management
+    Route::prefix('admin/video')->group(function () {
+        Route::get('/', [VideoController::class, 'show']);
+        Route::post('/', [VideoController::class, 'store']);
+        Route::delete('/', [VideoController::class, 'destroy']);
     });
 });

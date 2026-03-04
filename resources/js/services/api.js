@@ -37,6 +37,9 @@ export const publicApi = {
 
   // Get display data
   getDisplayData: () => api.get('/display/current'),
+
+  // Get video
+  getVideo: () => api.get('/video'),
 };
 
 // ==================== ADMIN API ====================
@@ -67,6 +70,13 @@ export const adminApi = {
   createCounter: (data) => api.post('/admin/services/counters', data),
   updateCounter: (id, data) => api.put(`/admin/services/counters/${id}`, data),
   deleteCounter: (id) => api.delete(`/admin/services/counters/${id}`),
+
+  // Video
+  getVideo: () => api.get('/admin/video'),
+  uploadVideo: (formData) => api.post('/admin/video', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }),
+  deleteVideo: () => api.delete('/admin/video'),
 };
 
 export default api;
