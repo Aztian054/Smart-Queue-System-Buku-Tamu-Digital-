@@ -1,6 +1,12 @@
 # Smart Queue System - Buku Tamu Digital
 
+php artisan serve
+
 Sistem Antrian Terintegrasi untuk pengelolaan pengunjung dan antrian secara digital.
+
+## Tentang
+
+Sistem ini dikembangkan untuk **BALAI PPMHKP** sebagai solusi antrian digital yang modern dan efisien. Sistem ini menggantikan sistem antrian manual dengan proses digital yang terintegrasi mulai dari pendaftaran pengunjung hingga pemanggilan antrian.
 
 ## 🚀 Fitur
 
@@ -291,4 +297,4 @@ MIT License
 ## 👨‍💻 Author
 
 Smart Queue System - Buku Tamu Digital  
-Developed for BPPMHKP (Balai Pengujian dan Sertifikasi Mutu Hasil Perikanan) - 2026
+Developed for BALAI PPMHKP (Balai Pengujian dan Sertifikasi Mutu Hasil Perikanan) - 2026

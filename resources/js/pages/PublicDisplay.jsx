@@ -250,7 +250,7 @@ const PublicDisplay = () => {
         <header className="flex justify-between items-center mb-4 animate-fade-in flex-shrink-0">
           <div className="flex items-center gap-4">
             <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
-            <img src="/assets/logo2-bppmhkp.png" alt="BPPMHKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
+            <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
           </div>
           <div className="text-right">
             <p className="text-2xl md:text-3xl font-mono font-bold tracking-wider">
@@ -406,7 +406,7 @@ const PublicDisplay = () => {
 
         {/* Footer */}
         <footer className="mt-2 text-center text-white/40 text-xs flex-shrink-0">
-          <p>Sistem Antrian Digital © 2026 • Powered by Smart Queue System • BPPMHKP Lampung</p>
+          <p>Sistem Antrian Digital © 2026 • Powered by Smart Queue System • BALAI PPMHKP Lampung</p>
         </footer>
       </div>
 

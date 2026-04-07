@@ -163,7 +163,7 @@ const QueueManagement = () => {
         <div className="p-6 border-b border-border">
           <div className="flex items-center justify-center gap-4 mb-3">
             <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-12 object-contain" />
-            <img src="/assets/logo2-bppmhkp.png" alt="BPPMHKP" className="h-12 object-contain" />
+            <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-12 object-contain" />
           </div>
           <div className="text-center">
             <h1 className="text-lg font-bold text-foreground">Smart Queue</h1>
