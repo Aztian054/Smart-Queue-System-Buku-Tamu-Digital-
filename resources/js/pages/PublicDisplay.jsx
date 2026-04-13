@@ -249,7 +249,7 @@ const PublicDisplay = () => {
         {/* Header - compact */}
         <header className="flex justify-between items-center mb-4 animate-fade-in flex-shrink-0">
           <div className="flex items-center gap-4">
-            <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
+            <img src="/assets/logo1-kkp.png" alt="KKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
             <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-10 md:h-12 object-contain drop-shadow-lg" />
           </div>
           <div className="text-right">

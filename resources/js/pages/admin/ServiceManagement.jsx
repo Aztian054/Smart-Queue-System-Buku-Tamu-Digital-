@@ -168,7 +168,7 @@ const ServiceManagement = () => {
         {/* Logo Header */}
         <div className="p-6 border-b border-border">
           <div className="flex items-center justify-center gap-4 mb-3">
-            <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-12 object-contain" />
+            <img src="/assets/logo1-kkp.png" alt="KKP" className="h-12 object-contain" />
             <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-12 object-contain" />
           </div>
           <div className="text-center">

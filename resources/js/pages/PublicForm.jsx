@@ -531,7 +531,7 @@ const PublicForm = () => {
           <Card variant="elevated" className="relative z-10 max-w-lg w-full animate-scale-in">
             <CardContent className="p-8">
               <div className="flex items-center justify-center gap-6 mb-8">
-                <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-16 object-contain drop-shadow-lg" />
+                <img src="/assets/logo1-kkp.png" alt="KKP" className="h-16 object-contain drop-shadow-lg" />
                 <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-16 object-contain drop-shadow-lg" />
               </div>
 
@@ -747,7 +747,7 @@ const PublicForm = () => {
           {/* Header with Logos */}
           <div className="text-center mb-8 animate-fade-in">
               <div className="flex items-center justify-center gap-6 mb-6">
-                <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-20 md:h-24 object-contain drop-shadow-lg" />
+                <img src="/assets/logo1-kkp.png" alt="KKP" className="h-20 md:h-24 object-contain drop-shadow-lg" />
                 <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-20 md:h-24 object-contain drop-shadow-lg" />
               </div>
             <h1 className={`text-3xl md:text-4xl font-bold transition-colors duration-700 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Smart Queue System</h1>

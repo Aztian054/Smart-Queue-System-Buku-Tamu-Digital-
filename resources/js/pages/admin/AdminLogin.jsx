@@ -67,7 +67,7 @@ const AdminLogin = () => {
         <CardHeader className="text-center pb-2">
           {/* Logos */}
           <div className="flex items-center justify-center gap-6 mb-6">
-            <img src="/assets/logo1-kkp.png.png" alt="KKP" className="h-16 object-contain drop-shadow-lg" />
+            <img src="/assets/logo1-kkp.png" alt="KKP" className="h-16 object-contain drop-shadow-lg" />
             <img src="/assets/logo2-bppmhkp.png" alt="BALAI PPMHKP" className="h-16 object-contain drop-shadow-lg" />
           </div>
           
