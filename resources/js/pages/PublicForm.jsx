@@ -1150,7 +1150,7 @@ const PublicForm = () => {
                 ) : !isWithinZone ? (
                   'Di luar zona akses'
                 ) : (
-                  'Daftar Antrian'
+                  'Submit'
                 )}
               </Button>
             </form>
